@@ -1,0 +1,70 @@
+linters-settings:
+  errcheck:
+    check-type-assertions: true
+    check-blank: false
+  gocritic:
+    enabled-tags:
+      - diagnostic
+      - experimental
+      - opinionated
+      - performance
+      - style
+    disabled-checks:
+      - dupImport
+      - unnecessaryBlock
+      - octalLiteral
+      - whyNoLint
+    settings:
+      rangeValCopy:
+        sizeThreshold: 64
+      rangeExprCopy:
+        sizeThreshold: 256
+  revive:
+    rules:
+      - name: unused-receiver
+  gofumpt:
+    extra-rules: false
+  misspell:
+    locale: US
+  nestif:
+    min-complexity: 4
+  exhaustruct:
+    exclude:
+      - '.+\.[a-zA-Z0-9_]*Options'
+
+linters:
+  disable-all: true
+  enable:
+    - asciicheck
+    - bodyclose
+    - durationcheck
+    - errcheck
+    - exportloopref
+    - gochecknoinits
+    - gocritic
+    - godot
+    - godox
+    - gomodguard
+    - goprintffuncname
+    - gosec
+    - gosimple
+    - exhaustive
+    - exhaustruct
+    - govet
+    - ineffassign
+    - makezero
+    - misspell
+    - nakedret
+    - nestif
+    - noctx
+    - predeclared
+    - revive
+    - rowserrcheck
+    - sqlclosecheck
+    - staticcheck
+    - stylecheck
+    - thelper
+    - unconvert
+    - unparam
+    - unused
+    - whitespace

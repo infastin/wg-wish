@@ -1,0 +1,21 @@
+# IDE
+.cache
+tags
+
+# Config
+.env
+.env.example
+config.yaml
+
+# Compose
+docker-compose.yaml
+compose.yaml
+
+# Database
+*.db
+
+# Directories
+/build/
+/data/
+/ssh/
+**/logs/
