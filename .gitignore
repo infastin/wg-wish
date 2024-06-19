@@ -4,7 +4,6 @@ tags
 
 # Config
 .env
-.env.example
 config.yaml
 
 # Compose
@@ -17,5 +16,4 @@ compose.yaml
 # Directories
 /build/
 /data/
-/ssh/
 **/logs/
