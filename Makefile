@@ -19,10 +19,6 @@ msgp:
 	go generate ./$(MSGP_DIR)
 .PHONY: msgp
 
-sqlc:
-	cd $(SQLC_DIR) && sqlc generate
-.PHONY: sqlc
-
 lint:
 	golangci-lint run
 .PHONY: lint
