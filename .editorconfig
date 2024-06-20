@@ -5,11 +5,6 @@ trim_trailing_whitespace = true
 max_line_length = off
 charset = utf-8
 
-[*.{proto,json,sql}]
-indent_style = space
-indent_size = 2
-tab_width = 2
-
 [{*.go,Makefile}]
 indent_style = tab
 indent_size = 2
