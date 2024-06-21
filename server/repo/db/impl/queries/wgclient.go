@@ -23,7 +23,6 @@ func wgClientUnmarshalKey(b []byte) (name string, err error) {
 //msgp:replace wgtypes.Key with:[32]byte
 //msgp:replace net.IP with:[]byte
 //msgp:replace net.IPNet with:msgpIPNet
-//msgp:replace null.Int with:msgpNullInt
 
 type wgClientValueV1 struct {
 	Address             net.IPNet

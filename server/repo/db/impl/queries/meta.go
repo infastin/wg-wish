@@ -1,6 +1,6 @@
 package queries
 
-// Bits distribution
+// KV meta information.
 //
 //	0.......4.........5........7
 //	┌───────┬─────────┬────────┐
