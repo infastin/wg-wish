@@ -79,7 +79,6 @@ func run(args []string) (err error) {
 			logger.Err(err).Msg("failed to close database repo")
 		}
 	}()
-	defer dbRepo.Close()
 
 	wgRepo := wgrepo.New(
 		&wgrepo.WireGuardRepoParams{
