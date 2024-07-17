@@ -5,10 +5,8 @@ import (
 	"fmt"
 	"io"
 	"os"
-	"os/signal"
 	"path"
 	"syscall"
-	"time"
 
 	charmssh "github.com/charmbracelet/ssh"
 	"github.com/guregu/null/v5"
@@ -20,11 +18,12 @@ import (
 	publickeyservice "github.com/infastin/wg-wish/server/service/impl/publickey"
 	wgservice "github.com/infastin/wg-wish/server/service/impl/wg"
 	"github.com/infastin/wg-wish/server/ssh"
+	"github.com/oklog/run"
 	"github.com/rs/zerolog"
 	"gopkg.in/natefinch/lumberjack.v2"
 )
 
-func run(args []string) (err error) {
+func runApp(args []string) (err error) {
 	cli, err := app.NewCLI(args)
 	if err != nil {
 		return fmt.Errorf("failed to parse command line arguments: %w", err)
@@ -143,31 +142,35 @@ func run(args []string) (err error) {
 		return err
 	}
 
-	sigCh := make(chan os.Signal, 1)
-	signal.Notify(sigCh, syscall.SIGINT, syscall.SIGQUIT, syscall.SIGTERM)
+	g := new(run.Group)
 
-	go func() {
+	g.Add(run.SignalHandler(ctx, syscall.SIGINT, syscall.SIGQUIT, syscall.SIGTERM))
+
+	g.Add(func() error {
 		logger.Info().Msg("starting ssh server")
 		if err := sshSrv.Run(); err != nil && !errors.Is(err, charmssh.ErrServerClosed) {
 			logger.Err(err).Msg("failed to start ssh server")
+			return err
 		}
-	}()
+		return nil
+	}, func(err error) {
+		logger.Info().Msg("shutting down ssh server")
+		if err := sshSrv.Shutdown(ctx); err != nil {
+			logger.Err(err).Msg("failed to shutdown ssh server")
+		}
+	})
 
-	<-sigCh
-
-	ctx, cancel := context.WithTimeout(ctx, time.Second*30)
-	defer cancel()
-
-	logger.Info().Msg("shutting down ssh server")
-	if err := sshSrv.Shutdown(ctx); err != nil {
-		logger.Err(err).Msg("failed to shutdown ssh server")
+	if err := g.Run(); err != nil {
+		if _, ok := err.(run.SignalError); !ok {
+			return err
+		}
 	}
 
 	return nil
 }
 
 func main() {
-	if err := run(os.Args); err != nil {
+	if err := runApp(os.Args); err != nil {
 		fmt.Fprintf(os.Stderr, "failed to run: %s\n", err)
 		os.Exit(1)
 	}
