@@ -8,14 +8,14 @@ type Releaser interface {
 	Release() error
 }
 
-func Close(err *error, closer Closer) error {
+func Close[C Closer](err *error, closer C) error {
 	if *err != nil {
 		return closer.Close()
 	}
 	return nil
 }
 
-func Release(err *error, releaser Releaser) error {
+func Release[R Releaser](err *error, releaser R) error {
 	if *err != nil {
 		return releaser.Release()
 	}
