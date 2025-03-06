@@ -2,7 +2,7 @@ services:
   wg-wish:
     image: ghcr.io/infastin/wg-wish
     environment:
-      WG_HOST: wish.local
+      WG_HOST: ADDRESS OF YOUR SERVER (e.g. 23.192.228.84 or example.com)
       SSH_ADMIN_KEYS: >-
         YOUR AUTHORIZED KEYS GO HERE
     ports:
