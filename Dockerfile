@@ -1,6 +1,6 @@
 # Build
 FROM golang:1.23-alpine3.21 AS build
-RUN apk add make
+RUN apk add git
 
 WORKDIR /app
 COPY go.mod go.sum ./
