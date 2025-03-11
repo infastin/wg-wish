@@ -4,9 +4,9 @@ import (
 	"fmt"
 
 	"github.com/ilyakaznacheev/cleanenv"
-	"github.com/infastin/go-validation"
-	isint "github.com/infastin/go-validation/is/int"
-	isstr "github.com/infastin/go-validation/is/str"
+	"github.com/infastin/gorack/validation"
+	isint "github.com/infastin/gorack/validation/is/int"
+	isstr "github.com/infastin/gorack/validation/is/str"
 	"github.com/rs/zerolog"
 )
 

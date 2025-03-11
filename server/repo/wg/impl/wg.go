@@ -11,7 +11,7 @@ import (
 	"time"
 
 	"github.com/guregu/null/v5"
-	"github.com/infastin/wg-wish/pkg/fastconv"
+	"github.com/infastin/gorack/fastconv"
 	"github.com/infastin/wg-wish/pkg/wgtypes"
 	"github.com/infastin/wg-wish/server/entity"
 	"github.com/infastin/wg-wish/server/errors"

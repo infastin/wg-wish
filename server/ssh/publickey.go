@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/charmbracelet/ssh"
-	"github.com/infastin/wg-wish/pkg/fastconv"
+	"github.com/infastin/gorack/fastconv"
 	"github.com/infastin/wg-wish/server/entity"
 	gossh "golang.org/x/crypto/ssh"
 )

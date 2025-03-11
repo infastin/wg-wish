@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"github.com/charmbracelet/ssh"
-	"github.com/infastin/wg-wish/pkg/errdefer"
-	"github.com/infastin/wg-wish/pkg/fastconv"
+	"github.com/infastin/gorack/errdefer"
+	"github.com/infastin/gorack/fastconv"
 	"github.com/infastin/wg-wish/server/entity"
 	"github.com/infastin/wg-wish/server/errors"
 	database "github.com/infastin/wg-wish/server/repo/db"
@@ -34,7 +34,7 @@ func New(params *DatabaseRepoParams) (dbrepo *DatabaseRepo, err error) {
 	if err != nil {
 		return nil, err
 	}
-	defer errdefer.Close(&err, db)
+	defer errdefer.Close(&err, db.Close)
 
 	err = queries.Prepare(db)
 	if err != nil {
